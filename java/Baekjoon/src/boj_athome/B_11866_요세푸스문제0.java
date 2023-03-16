@@ -14,7 +14,7 @@ public class B_11866_요세푸스문제0 {
 		int K = sc.nextInt();
 		Queue<Integer> queue1 = new LinkedList<>();
 		
-		for (int i = 0; i < N; i++) {
+		for (int i = 1; i <= N; i++) {
 			queue1.add(i);
 		}
 		
