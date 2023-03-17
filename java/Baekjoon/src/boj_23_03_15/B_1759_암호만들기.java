@@ -1,15 +1,15 @@
 package boj_23_03_15;
-조합으로 다시 만들어야됨
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Arrays;
 import java.util.StringTokenizer;
 
 public class B_1759_암호만들기 {
 
 	private static int L, C;
 	private static char[] arrChar;
-	private static boolean[] visited;
 	private static char[] keyCombination;
 	private static StringBuilder sb;
 
@@ -27,28 +27,38 @@ public class B_1759_암호만들기 {
 		for (int i = 0; i < C; i++)
 			arrChar[i] = st.nextToken().charAt(0);
 
-		visited = new boolean[C];
+		Arrays.sort(arrChar);
+
 		keyCombination = new char[L];
 
-		permutation(0, 1);
+		combination(0, 0);
 
 	}
 
-	private static void permutation(int N, int a) {
+	private static void combination(int N, int a) {
 		if (N == L) {
+			int aeiou = 0;
+			for (int i = 0; i < L; i++) {
+				char check = keyCombination[i];
+				switch (check) {
+				case 'a':
+				case 'e':
+				case 'i':
+				case 'o':
+				case 'u':
+					aeiou++;
+				}
+			}
+			if (aeiou < 1) return;
+			if (aeiou > L - 2) return;
 			for (int i = 0; i < L; i++)
 				System.out.print(keyCombination[i]);
 			System.out.println();
 			return;
 		}
-
 		for (int i = a; i < C; i++) {
-			if (visited[i] == true)
-				continue;
 			keyCombination[N] = arrChar[i];
-			visited[i] = true;
-			permutation(N + 1, a + 1);
-			visited[i] = false;
+			combination(N + 1, i + 1);
 		}
 
 	}
