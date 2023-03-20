@@ -74,18 +74,11 @@ public class B_1941_소문난칠공주 {
 	}
 
 	private static boolean DFSisLinked() {
-		
-		
-		for (int i = 0; i < 7; i++) {
-			if (visited[arrCombIndex[i] - 1] == true)
-				return DFSisLinked(i + 1);
-			if (visited[arrCombIndex[i] + 1] == true)
-				return DFSisLinked(i + 1);
-			if (visited[arrCombIndex[i] - 7] == true)
-				return DFSisLinked(i + 1);
-			if (visited[arrCombIndex[i] + 7] == true)
-				return DFSisLinked(i + 1);
+		for (int i = 6; i >= 0; i--) {
+			if (arrCombIndex[i])
 		}
+		
+		
 		return false;
 	}
 	
