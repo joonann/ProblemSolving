@@ -1,5 +1,5 @@
 package boj_23_0316;
-복습ㄱㄱㄱ
+복습ㄱㄱㄱ // 164 page
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;

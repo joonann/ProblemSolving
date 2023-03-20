@@ -7,6 +7,7 @@ import java.util.Scanner;
 
 
 정렬한 다음 더하면서 계속 최솟값 두개를 더하는 식으로 해야됨!
+우선순위큐
 
 public class B_1715_카드정렬하기 {
 
