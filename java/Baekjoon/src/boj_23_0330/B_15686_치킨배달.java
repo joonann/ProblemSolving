@@ -12,7 +12,7 @@ public class B_15686_치킨배달 {
 
 	private static int N, M, bbqCount, homeCount;
 	private static int minDistance = 0;
-	private static int[][] newMap, originalMap;
+	private static int[][] newMap;
 	private static ArrayList<Location> bbqList = new ArrayList<>();
 	private static ArrayList<Location> homeList = new ArrayList<>();
 	private static int[] combIndex; // 인덱스 M개
@@ -37,14 +37,12 @@ public class B_15686_치킨배달 {
 		M = Integer.parseInt(st.nextToken());
 
 		newMap = new int[N + 1][N + 1];
-		originalMap = new int[N + 1][N + 1];
 		combIndex = new int[M];
 
 		for (int i = 1; i <= N; i++) {
 			st = new StringTokenizer(br.readLine());
 			for (int j = 1; j <= N; j++) {
 				int temp = Integer.parseInt(st.nextToken());
-				originalMap[i][j] = temp;
 				newMap[i][j] = temp;
 				if (temp == 1) {
 					homeList.add(new Location(i, j));
