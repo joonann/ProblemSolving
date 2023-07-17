@@ -16,14 +16,23 @@ dx = (1, -1, 0, 0)
 
 N, M = map(int, input().split())
 maze = [list(map(int, input().split())) for _ in range(N)]
-visitied = [[False for _ in range(N)] for _ in range(M)]
-
+visited = [[False for _ in range(N)] for _ in range(M)]
 
 queue = []
-queue.push((0, 0))
-def bfs(position):
-    a, b = queue.pop()
-    if visited[a][b]:
-        return
-    visited[a][b] = True
-    
+distance = 0
+
+queue.append((0, 0))
+while queue:
+	a, b = queue.pop()
+	if a == N-1 and b == M-1:
+		break
+	if visited[a][b] != True:
+		visited[a][b] = True
+		distance += 1
+		for i in range(4):
+			y, x = a + dy[i], b + dx[i]
+			if (y < 0 or y >= N or x < 0 or x >= M):
+				continue
+			queue.append((y, x))
+
+print(distance)
