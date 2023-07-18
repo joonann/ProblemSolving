@@ -23,8 +23,10 @@ for _ in range(N):
 # readline의 경우 맨 뒤에 '\n'까지 입력받으므로 제거해줘야 함
 # strip 메서드 사용
 
+# 방문 여부 테이블
 visited = [[False for _ in range(M)] for _ in range(N)]
 
+# BFS를 사용해 최단거리 구하기
 queue = deque()
 queue.append((0, 0))
 visited[0][0] = True
@@ -45,5 +47,9 @@ while queue:
 print(maze[N-1][M-1])
 
 # deque를 사용해 BFS 알고리즘 구현
-# queue라는 list에서 pop을 하면 맨 뒤 요소를 가져오기 때문에
+# list에서 pop을 하면 맨 뒤 요소를 가져오기 때문에
 # deque를 사용했음.
+
+# 셀프 피드백
+# visited가 필요가 없다
+# queue = deque([(0, 0)]) 으로 줄일 수 있음
