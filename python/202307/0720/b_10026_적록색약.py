@@ -6,9 +6,7 @@
 # 적록색약이 아닌 사람이 본 구역 개수, 적록색약인 사람이 본 구역 개수 출력
 
 from collections import deque
-import sys
-
-input = sys.stdin.readline
+import copy
 
 # 동서남북
 dx = (0, 0, -1, 1)
@@ -18,6 +16,7 @@ N = int(input())
 
 # 일반 그리드 테이블 입력
 grid = [list(input()) for _ in range(N)]
+new_grid = copy.deepcopy(grid)
 
 queue = deque() # 얘를 밖으로 빼니까 메모리초과는 안 나네?
 # B_count = 0
@@ -46,15 +45,20 @@ def bfs(this_grid, a, b):
 for i in range(N):
     for j in range(N):
         if grid[i][j] in 'RGB':
-            bfs(grid, i, j)
-            res1 += 1
+            bfs(grid, i, j) # n제곱회 수행
+            res1 += 1 
 
 print(grid)
 
 for i in range(N):
     for j in range(N):
-        if grid[i][j] == 'CD':
-            bfs(grid, i, j)
+        if new_grid[i][j] == 'G':
+            new_grid[i][j] = 'R'
+
+for i in range(N):
+    for j in range(N):
+        if new_grid[i][j] in 'RB':
+            bfs(new_grid, i, j)
             res2 += 1
 
 print(res1, res2)
