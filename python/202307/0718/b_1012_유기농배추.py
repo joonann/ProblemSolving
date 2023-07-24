@@ -49,4 +49,3 @@ for _ in range(T):
                 worm += 1
 
     print(worm)
-
