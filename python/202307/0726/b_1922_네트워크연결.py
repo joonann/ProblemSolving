@@ -35,7 +35,7 @@ def union(parent, x, y):
 	if a < b:
 		parent[b] = a
 	else:
-		parent[a] = b    
+		parent[a] = b   
 
 q = []
 graph = [[] for _ in range(n + 1)]
