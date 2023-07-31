@@ -20,9 +20,7 @@ w, h = map(int, input().split())
 
 # 격자판 입력
 map1 = [list(map(int, input().split())) for _ in range(h)]
-visited = [[False for _ in range(w)] for _ in range(h)]
-
-min1 = [[0 for _ in range(w)] for _ in range(h)] ######
+visited = [[[0] * (k + 1) for _ in range(w)] for _ in range(h)]
 
 # 맵 안에 있어야 되고
 # 장애물 1이면 안 되고
@@ -30,16 +28,16 @@ min1 = [[0 for _ in range(w)] for _ in range(h)] ######
 def ispossible(a, b):
     if 0 <= a < h and 0 <= b < w:
         if map1[a][b] == 0:
-            if visited[a][b] == False:
-                return True
+            return True
     return False
 
 result = 0
 
 q = deque()
 # a, b 좌표, 나이트 움직임 횟수, 총 움직임 횟수
-q.append((0, 0, 0, 0))
-visited[0][0] = True
+q.append((0, 0, 0))
+# if visited 여부로 판단할 것이기 때문에 처음 이동횟수 1로, 나중에 1 빼줘야 된다.
+visited[0][0][0] = 1
 
 result = -1
 
@@ -47,10 +45,19 @@ if map1[0][0] == 0:
     # bfs
     while q:
         # 현재 위치
-        a, b, knight_move_now, move_now = q.popleft()
+        a, b, knight_move_now = q.popleft()
         if a == h - 1 and b == w - 1:
-            result = move_now
+            result = visited[a][b][knight_move_now] - 1
             break
+
+        # 동서남북 먼저 조건을 확인해서 q에 append
+        for i in range(4):
+            na, nb = a + dx[i], b + dy[i]
+
+            if ispossible(na, nb):
+                if not visited[na][nb][knight_move_now]:
+                    visited[na][nb][knight_move_now]
+                q.append((na, nb, knight_move_now))
         
         # 현재 나이트 이동 횟수가 남아있는 경우,
         if knight_move_now < k:
@@ -58,19 +65,17 @@ if map1[0][0] == 0:
                 na, nb = a + knightx[i], b + knighty[i]
                 # 갈 수 있으면 q에 append
                 if ispossible(na, nb):
-                    visited[na][nb] = True
-                    q.append((na, nb, knight_move_now + 1, move_now + 1))
-                    min1[na][nb] = move_now + 1 ####
+                    if not visited[na][nb][knight_move_now + 1]:
+                        visited[na][nb][knight_move_now + 1] \
+                            = visited[a][b][knight_move_now] + 1
+                    q.append((na, nb, knight_move_now + 1))
 
-        # 동서남북도 마찬가지 조건을 확인해서 q에 append
-        for i in range(4):
-            na, nb = a + dx[i], b + dy[i]
-
-            if ispossible(na, nb):
-                visited[na][nb] = True
-                q.append((na, nb, knight_move_now, move_now + 1))
-                min1[na][nb] = move_now + 1 ####
 
 print(result)
-for i in range(h):
-    print(min1[i])
+
+
+# visited를 3차원 배열로 만들어서 knight 이동의 횟수도 점점 늘려가주는 방법을 사용해야 한다.
+# 그렇지 않으면 최소 이동 횟수만 생각하기 때문에 knight이동으로 먼저간 곳은 동서남북 이동으로 방문하지
+# 않는다. 
+
+# 집가서 디버깅하자
