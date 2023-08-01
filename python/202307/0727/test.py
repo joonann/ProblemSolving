@@ -1,2 +1,6 @@
-c = [0, 1] * 4
-print(c)
+print('         ,r\'"7')
+print('r`-_   ,\'  ,/')
+print(' \\. ". L_r\'')
+print('   `~\\/')
+print('      |')
+print('      |')
