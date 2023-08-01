@@ -54,21 +54,22 @@ if map1[0][0] == 0:
         for i in range(4):
             na, nb = a + dx[i], b + dy[i]
 
-            if ispossible(na, nb):
-                if not visited[na][nb][knight_move_now]:
-                    visited[na][nb][knight_move_now]
-                q.append((na, nb, knight_move_now))
+            if 0 <= na < h and 0 <= nb < w and map1[na][nb] == 0 and \
+                    not visited[na][nb][knight_move_now]:
+                        visited[na][nb][knight_move_now] \
+                            = visited[a][b][knight_move_now] + 1
+                        q.append((na, nb, knight_move_now))
         
         # 현재 나이트 이동 횟수가 남아있는 경우,
         if knight_move_now < k:
             for i in range(8):
                 na, nb = a + knightx[i], b + knighty[i]
                 # 갈 수 있으면 q에 append
-                if ispossible(na, nb):
-                    if not visited[na][nb][knight_move_now + 1]:
+                if 0 <= na < h and 0 <= nb < w and map1[na][nb] == 0 and \
+                    not visited[na][nb][knight_move_now + 1]:
                         visited[na][nb][knight_move_now + 1] \
                             = visited[a][b][knight_move_now] + 1
-                    q.append((na, nb, knight_move_now + 1))
+                        q.append((na, nb, knight_move_now + 1))
 
 
 print(result)
@@ -78,4 +79,4 @@ print(result)
 # 그렇지 않으면 최소 이동 횟수만 생각하기 때문에 knight이동으로 먼저간 곳은 동서남북 이동으로 방문하지
 # 않는다. 
 
-# 집가서 디버깅하자
+# 괜히 메서드로 만들지 말자. 메서드 호출 때문에 스택오버플로우 발생할 수도 있음!
