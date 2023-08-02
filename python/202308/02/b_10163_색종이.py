@@ -11,7 +11,6 @@ input = sys.stdin.readline
 
 n = int(input())
 graph = [[0 for _ in range(1001)] for _ in range(1001)]
-counts = [0] * (n + 1)
 
 # graph(맨 위에 놓인 종이 그래프)에 종이 한 장씩 덮어쓰기.
 for paper in range(1, n + 1):
