@@ -32,7 +32,19 @@ else:
             k -= shell
             n+= 1
             continue
-        x = n + k // 
-        y = n
+        x = y = n
+        width = c - 2 * (n-1)
+        height = r - 2 * (n-1)
+        if k <= height - 1:
+            y += k
+        elif k <= shell // 2:
+            y += height - 1
+            x += k - height + 1
+        elif k <= shell // 2 + height - 1:
+            x += width - 1
+            y += height
+        else:
+            x += 
+
         break
     print(x, y)
