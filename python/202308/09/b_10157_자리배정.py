@@ -27,24 +27,25 @@ else:
     shell = 0
 
     while True:
-        shell += 2*(c+r-4*n+2)
+        shell = 2*(c+r) - 4
         if k > shell:
             k -= shell
             n+= 1
+            c -= 2
+            r -=2 
             continue
-        x = y = n
-        width = c - 2 * (n-1)
-        height = r - 2 * (n-1)
-        if k <= height - 1:
-            y += k
-        elif k <= shell // 2:
-            y += height - 1
-            x += k - height + 1
-        elif k <= shell // 2 + height - 1:
-            x += width - 1
-            y += height
+        x = y = n   
+        if 1 <= k < r:
+            y += k - 1
+        elif r <= k < r + c - 1:
+            y += r - 1
+            x += k - r
+        elif r + c - 1 <= k < r * 2 + c - 2:
+            x += c - 1
+            y += r - 1
+            y -= k - (r + c - 1)
         else:
-            x += 
-
+            x += c - 1
+            x -= k - (r * 2 + c - 2)
         break
     print(x, y)
