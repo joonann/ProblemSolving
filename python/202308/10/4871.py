@@ -3,8 +3,7 @@
 
 def DFS1(v):
     visited[v] = True
-    for i in adj_v[v]:
-        w = i
+    for w in adj_v[v]:
         if visited[w] == False:
             DFS1(w)
 
