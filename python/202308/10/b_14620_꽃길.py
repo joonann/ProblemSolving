@@ -25,26 +25,26 @@ for i in range(1, n-1):
             costs[i][j] += yard[i+x][j+y]
 
 # 점유된 땅인지 확인 (가장자리는 무조건 점유된 땅으로 설정)
-occupied = [[False for _ in range(n)] for _ in range(n)]
-# for i in range(n):
-#     occupied[0][i] = True
-#     occupied[n-1][i] = True
-#     occupied[i][0] = True
-#     occupied[i][n-1] = True
-# # 안해도 될 것 같다.
+# 0번째 occupied : 첫번째 선택 이후
+# 1번째 occupied : 두번째 선택 이후
+occupied = [[[False for _ in range(n)] for _ in range(n)] for _ in range(2)]
 
 # 최댓값은 3001보다 작음(200 * 15)
 answer = 3001
 
-def dfs(k, x, y):
-    global answer
-    
-    if k == 0:
-        answer = min(answer, now_cost)
-    
-stack 
 
-
+# 한 곳을 선택하고 occupied의 13 지점을 True로 바꿔준다.
+# occupied에 false인 곳을 선택하고 13지점을 True로 바꿔준다.
+# occupied가 3차원 배열이면 해결되겠다
+# dfs가 끝나면 
+def dfs(k, x, y, now_cost):
+	# 이미 세 곳을 선택했으면 answer보다 작은지 확인한다.
+	if k == 3:
+		answer = min(answer, now_cost)
+	now_cost += costs[x, y]
+	k += 1
+	
+	
 print(answer)
 
 
