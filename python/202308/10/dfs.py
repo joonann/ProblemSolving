@@ -17,10 +17,9 @@ for t in range(1, T+1):
             value = stack.pop()
             if value == end:
                 return 1
-            if not visited[value]:
-                visited[value] = True
             for j in graph[value]:
                 if not visited[j]:
+                    visited[value] = True
                     stack.append(j)
  
         return 0
