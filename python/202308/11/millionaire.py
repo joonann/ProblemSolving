@@ -11,16 +11,16 @@ t = int(input())
 for tc in range(1, t+1):
     n = int(input())
     prices = list(map(int, input().split()))
-
+	
     answer = 0
     total = 0
     sell_price = prices[-1]
-    for i in range(n-1, -1, -1):
-        buy_price = prices[i]
-        if buy_price < sell_price:
-            total += sell_price - buy_price
+	for i in range(n-1, -1, -1):
+		buy_price = prices[i]
+		if buy_price < sell_price:
+			total += sell_price - buy_price
         else:
             sell_price = buy_price 
-        answer = max(answer, total)
+		answer = max(answer, total)
 
     print(f'#{tc} {answer}')
