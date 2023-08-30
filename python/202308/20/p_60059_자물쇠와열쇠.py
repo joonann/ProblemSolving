@@ -1,48 +1,54 @@
-# 자물쇠와 열쇠
-# n x n 자물쇠
-# m x m 열쇠
+def attach(x, y, M, key, board):
+    for i in range(M):
+        for j in range(M):
+            board[x+i][y+j] += key[i][j]
 
-# key[0] 1 2 3
-# key[1] 4 5 6
-# key[2] 7 8 9
-# 뒤집어서 key[2], key[1], key[0]에서 요소 하나씩 엮어
-# list로 만들면 90도 회전
-def rotate_key(key):
-	return list(zip(*key[::-1]))
+def detach(x, y, M, key, board):
+    for i in range(M):
+        for j in range(M):
+            board[x+i][y+j] -= key[i][j]
 
-# board의 중앙부분 전부 1이면 열쇠가 딱 맞는 것 >> True
-def check_board(board, n, m):
-	for i in range(n-1, n+m-1):
-		for j in range(n-1, n+m-1):
-			if board[i][j] != 1:
-				return False
-	return True
+def rotate90(arr):
+    n = len(arr)
+    result = [[0 for _ in range(n)] for _ in range(n)]
+    for i in range(n):
+        for j in range(n):
+            result[j][n - i - 1] = arr[i][j]
+    return result
 
-def attach_key(x, y, m, key, board):
-	pass
-
-def detach_key(x, y, m, key, board):
-	pass
+def check(board, N):
+    for i in range(N, N*2):
+        for j in range(N, N*2):
+            if board[i][j] != 1:
+                return False
+    return True
 
 def solution(key, lock):
-	m, n = len(key), len(lock)
-	board_l = n * 2 + m - 2
-	board = [[0 for _ in range(board_l)] for _ in range(board_l)]
+    M, N = len(key), len(lock)
 
-	# [n-1:n+m-1] 가 가운데 자물쇠 범위
-	for i in range(n):
-		for j in range(n):
-			board[i+n-1][j+n-1] = lock[i][j]
-	
-	rotated_key = key
-	for _ in range(4):
-		rotated_key = rotate_key(rotated_key)
-		
-		for x in range(n+m-1):
-			for y in range(n+m-1):
-				attach_key(x, y, m, rotated_key, board)
-				if (check_board(board, n, m)):
-					return True
-				detach_key(x, y, m, rotated_key, board)  
+    board = [[0 for _ in range(N*3)] for _ in range(N*3)]
+    
+	# 자물쇠 중앙 배치
+    for i in range(N):
+        for j in range(N):
+            board[N+i][N+j] = lock[i][j]
 
-return False
+    # 모든 방향
+    for _ in range(4):
+        key = rotate90(key)
+        for x in range(1, N*2):
+            for y in range(1, N*2):
+                # 열쇠 넣기
+                attach(x, y, M, key, board)
+                # 열리는지 check
+                if(check(board, N)):
+                    return True
+                # 열쇠 빼기
+                detach(x, y, M, key, board)
+                
+    return False
+
+
+# key = [[0, 0, 0], [1, 0, 0], [0, 1, 1]]
+# lock = [[1, 1, 1], [1, 1, 0], [1, 0, 1]]
+# print(solution(key, lock))

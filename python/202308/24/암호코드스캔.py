@@ -22,11 +22,13 @@
 
 '''
 
+import sys
+sys.stdin = open("sample_input.txt", "r")
+
 # 56보다 작으면 56으로 맞추고 112보다 작으면 앞에 0 넣어서 112로 맞추기!
 hex = '0123456789ABCDEF'
 hex_to_bin = ['0000', '0001', '0010', '0011', '0100', '0101', '0110', '0111',\
        '1000', '1001', '1010', '1011', '1100', '1101', '1110', '1111']
-
 code = ['0001101', '0011001', '0010011', '0111101', '0100011', '0110001', '0101111', '0111011', '0110111', '0001011']
 
 def pw_sum(password): # password에 int 리스트 넣어야됨, k는 password몇배수인지
@@ -59,7 +61,6 @@ def password_dec(password, k):
     while i < 56*k:
         tmp += password[i]
         i += k
-    
     for i in range(8):
         t = ''.join(map(str, list(tmp[i*7:i*7+7])))
         r.append(code.index(t))
@@ -74,14 +75,13 @@ def split_zero(s):
             i += 1
             continue
         tmp = ''
-        while i < len(s) and a != '0':
+        while i < len(s) and s[i] != '0':
             tmp += s[i]
             i += 1
-             
+        res.append(tmp)
+    return res
 
-        
-
-t = int(input())
+t = int(input().rstrip())
 for tc in range(1, t+1):
     n, m = map(int, input().split())
     a = [input().rstrip() for _ in range(n)]
@@ -89,8 +89,9 @@ for tc in range(1, t+1):
     set1 = set()
     answer = 0
 
+    
     for a1 in a:
-        if a1 == last:
+        if a1 == last or (not '0' in a1):
             continue
         l = 0
         splits = split_zero(a1)
@@ -100,6 +101,7 @@ for tc in range(1, t+1):
         last = a1    
 
     # 2진수로 변환하고 앞에 0으로 채우기
+    print('set1', set1)
     for h in set1:
         password = ''
         for i in h:
@@ -111,5 +113,5 @@ for tc in range(1, t+1):
         answer = pw_sum(password)
         if answer:
             break
-
     print(f'#{tc} {answer}')
+
