@@ -1,8 +1,8 @@
-'''
-퇴사
-백준 14501
+# '''
+# 퇴사
+# 백준 14501
 
-'''
+# '''
 
 n = int(input())
 arr = [list(map(int, input().split())) for _ in range(n)]
@@ -18,7 +18,7 @@ for i in range(1<<n):
     prev = 0
     ben = 0
     is_not_possible = False
-    # print('sub', sub)
+    print('sub', sub)
     for a in sub:
         if prev > a:
             is_not_possible = True
@@ -37,3 +37,12 @@ for i in range(1<<n):
         ans = ben
 
 print(ans)
+
+# N = int(input())
+# days = [0 for _ in range(N+5)]
+# for i in range(N):
+#     day, val = map(int, input().split())
+#     new = max(days[:i+1]) + val
+#     days[i+day] = max(days[i+day], new)
+#     print(i+1, days)
+# print(max(days[:N+1]))
