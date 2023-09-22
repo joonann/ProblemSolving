@@ -8,6 +8,9 @@ N x N 크기 보드에서 2048 게임
 from collections import deque
 
 def new_board_up(board, n):
+	# 1. q에 한 줄에 있는 숫자들(0 제외)를 차례로 넣어준다.
+	# 2. q에 있는 숫자들 중에서 위쪽으로 옮겼을 때의 숫자들을 nq에 넣는다.
+	# 3. nq에 있는 숫자들을 위에서부터 순서대로 적어준다.
 	new = [[0] * n for _ in range(n)]
 	for i in range(n):
 		q = deque()
@@ -16,6 +19,7 @@ def new_board_up(board, n):
 			num = board[j][i]
 			if num:
 				q.append(num)
+
 		j = 0
 		while j < len(q) - 1:
 			num = q[j]
@@ -128,7 +132,6 @@ def play_game(board, n, k):
 	play_game(new_board_right(board, n), n, k-1)
 
 n = int(input())
-
 board = [list(map(int, input().split())) for _ in range(n)]
 ans = 0
 play_game(board, n, 5)
