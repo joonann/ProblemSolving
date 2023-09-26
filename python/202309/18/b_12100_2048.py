@@ -126,6 +126,7 @@ def play_game(board, n, k):
 		tmp = max(map(max, board))
 		ans = max(ans, tmp) 
 		return
+	
 	play_game(new_board_up(board, n), n, k-1)
 	play_game(new_board_down(board, n), n, k-1)
 	play_game(new_board_left(board, n), n, k-1)
